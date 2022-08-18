@@ -1,0 +1,12 @@
+-- Table: public.dim_mes
+
+-- DROP TABLE IF EXISTS public.dim_mes;
+
+CREATE TABLE IF NOT EXISTS public.dim_mes
+(
+    mes_id SERIAL NOT NULL ,
+    mes character varying(15) COLLATE pg_catalog."default",
+    CONSTRAINT dim_mes_pkey PRIMARY KEY (mes_id)
+)
+
+TABLESPACE pg_default;
