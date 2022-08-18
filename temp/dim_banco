@@ -1,0 +1,13 @@
+-- Table: public.dim_banco
+
+-- DROP TABLE IF EXISTS public.dim_banco;
+
+CREATE TABLE IF NOT EXISTS public.dim_banco
+(
+    banco_id SERIAL NOT NULL,
+    nome character varying(100) COLLATE pg_catalog."default" NOT NULL,
+    ativo "char" NOT NULL,
+    CONSTRAINT dim_banco_pkey PRIMARY KEY (banco_id)
+)
+
+TABLESPACE pg_default;

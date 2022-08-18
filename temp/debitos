@@ -1,0 +1,14 @@
+-- Table: public.debitos
+
+-- DROP TABLE IF EXISTS public.debitos;
+
+CREATE TABLE IF NOT EXISTS public.debitos
+(
+    deb_id SERIAL NOT NULL,
+    dim_mes integer,
+    ano integer,
+    valor integer,
+    CONSTRAINT debitos_pkey PRIMARY KEY (deb_id)
+)
+
+TABLESPACE pg_default;
