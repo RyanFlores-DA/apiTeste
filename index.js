@@ -20,6 +20,7 @@ app.get('/', (request, response) => {
 
 
 app.get('/chart/', db.getChartById);
+app.get('/priori/', db.getPrioris);
 
 app.listen(port, () => {
     console.log(`App running on port ${port}.`)

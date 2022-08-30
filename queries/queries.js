@@ -16,7 +16,6 @@ const pool = new Pool({
 
 })
 
-var arrayDados = [];
 const getChartById = (request, response) => {
     //const id = parseInt(request.params.id)
     pool.query('SELECT c.salario, d.mes, g.valor FROM chart c  inner join dim_mes d on (d.mes_id = c.dim_mes) inner join debitos g on (g.dim_mes = d.mes_id)',(error, results) => {
@@ -28,7 +27,17 @@ const getChartById = (request, response) => {
     console.log('CHART');
 }
 
+const getPrioris = (request, response) => {
+    pool.query('SELECT * FROM prioridades',(error, results) => {
+        if (error) {
+            throw error
+        }
+        response.status(200).json(results.rows)
+    })
+    console.log('Prioridades');
+}
+
 module.exports = {
-    arrayDados,
     getChartById,
+    getPrioris
 }
