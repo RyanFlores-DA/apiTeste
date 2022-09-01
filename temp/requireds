@@ -2,3 +2,4 @@ npm install express
 npm install pg
 npm install dotenv
 npm install cors
+npm i jsonwebtoken dotenv-safe
