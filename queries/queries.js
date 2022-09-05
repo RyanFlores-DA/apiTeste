@@ -34,7 +34,7 @@ const getPrioris = (request, response) => {
         }
         response.status(200).json(results.rows)
     })
-    console.log('Prioridades');
+    console.log('Prioridadess');
 }
 
 module.exports = {
