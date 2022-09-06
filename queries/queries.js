@@ -28,7 +28,7 @@ const getChartById = (request, response) => {
 }
 
 const getPrioris = (request, response) => {
-    pool.query('SELECT id, priori, ano, valor, m.mes, SUM(valor) FROM prioridades p inner join dim_mes m on (m.mes_id = p.dim_mes) order by id',(error, results) => {
+    pool.query('SELECT id, priori, ano, valor, m.mes FROM prioridades p inner join dim_mes m on (m.mes_id = p.dim_mes)',(error, results) => {
         if (error) {
             throw error
         }
