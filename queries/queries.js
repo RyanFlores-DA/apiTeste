@@ -37,7 +37,31 @@ const getPrioris = (request, response) => {
     console.log('Prioridadess');
 }
 
+const addPriori = (req, res) =>{
+    const {mes, ano, priori, valor} = req.body;
+    //Validacao
+    pool.query('SELECT * FROM prioridades', (error, results) =>{
+        if(results.rows.length){
+            //res.send("Prioridade já cadastrada!");
+        }
+    });
+        
+        pool.query('INSERT INTO prioridades (dim_mes, ano, priori,valor) VALUES ($1, $2, $3, $4)', [mes, ano, priori,valor], (error, results) =>{
+            if(error) throw error;
+            if(res.status = 200){
+                res.json({
+                    "Status": "Ok"
+                })
+            }else{
+                res.json({
+                    "Status code": res.status
+                })
+            }
+        });
+}
+
 module.exports = {
     getChartById,
-    getPrioris
+    getPrioris,
+    addPriori
 }
