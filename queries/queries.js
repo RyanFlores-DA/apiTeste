@@ -60,8 +60,19 @@ const addPriori = (req, res) =>{
         });
 }
 
+const getSaxDeb = (request, response) => {
+    pool.query('select SUM(c.salario) as ssalario, SUM(d.valor) as svalor from chart c inner join debitos d on (d.deb_id = c.id)',(error, results) => {
+        if (error) {
+            throw error
+        }
+        response.status(200).json(results.rows)
+    })
+    console.log('Salario x Debitos');
+}
+
 module.exports = {
     getChartById,
     getPrioris,
-    addPriori
+    addPriori,
+    getSaxDeb
 }
