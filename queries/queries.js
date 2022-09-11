@@ -70,9 +70,20 @@ const getSaxDeb = (request, response) => {
     console.log('Salario x Debitos');
 }
 
+const getPerfo = (request, response) => {
+    pool.query('select (SUM(c.salario) - SUM(d.valor)) as performa from chart c inner join debitos d on (d.deb_id = c.id)',(error, results) => {
+        if (error) {
+            throw error
+        }
+        response.status(200).json(results.rows)
+    })
+    console.log('Performa');
+}
+
 module.exports = {
     getChartById,
     getPrioris,
     addPriori,
-    getSaxDeb
+    getSaxDeb,
+    getPerfo
 }

@@ -23,6 +23,7 @@ app.get('/chart/', db.getChartById);
 app.get('/priori/', db.getPrioris);
 app.post('/v1/priori', db.addPriori);
 app.get('/sadeb/', db.getSaxDeb);
+app.get('/perfor/', db.getPerfo);
 
 app.listen(port, () => {
     console.log(`App running on port ${port}.`)
