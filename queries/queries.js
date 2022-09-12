@@ -1,89 +1,15 @@
 const { response } = require('express')
-
-const Pool = require('pg').Pool
-var connectDb = "postgres://ydiyghfkmzredl:87d4bf164b7176209b36cd893712fd3a6b72f675887fe18394816132a214c407@ec2-44-205-41-76.compute-1.amazonaws.com:5432/d9chpetiioi5k7"
-const pool = new Pool({
-    /* user: 'ydiyghfkmzredl',
-    host: 'ec2-44-205-41-76.compute-1.amazonaws.com',
-    database: 'd9chpetiioi5k7',
-    password: '87d4bf164b7176209b36cd893712fd3a6b72f675887fe18394816132a214c407',
-    port: 5432, */
-    connectionString: connectDb,
-    ssl: {
-        rejectUnauthorized: false,
-      }
-
-
-})
-
-const getChartById = (request, response) => {
-    //const id = parseInt(request.params.id)
-    pool.query('SELECT c.salario, d.mes, g.valor FROM chart c  inner join dim_mes d on (d.mes_id = c.dim_mes) inner join debitos g on (g.dim_mes = d.mes_id)',(error, results) => {
-        if (error) {
-            throw error
-        }
-        response.status(200).json(results.rows)
-    })
-    console.log('CHART');
-}
-
-const getPrioris = (request, response) => {
-    pool.query('SELECT id, priori, ano, valor, m.mes FROM prioridades p inner join dim_mes m on (m.mes_id = p.dim_mes) order by p.id',(error, results) => {
-        if (error) {
-            throw error
-        }
-        response.status(200).json(results.rows)
-    })
-    console.log('Prioridadess');
-}
-
-const addPriori = (req, res) =>{
-    const {mes, ano, priori, valor} = req.body;
-    //Validacao
-    pool.query('SELECT * FROM prioridades', (error, results) =>{
-        if(results.rows.length){
-            //res.send("Prioridade já cadastrada!");
-        }
-    });
-        
-        pool.query('INSERT INTO prioridades (dim_mes, ano, priori,valor) VALUES ($1, $2, $3, $4)', [mes, ano, priori,valor], (error, results) =>{
-            if(error) throw error;
-            if(res.status = 200){
-                res.json({
-                    "Status": "Ok"
-                })
-            }else{
-                res.json({
-                    "Status code": res.status
-                })
-            }
-        });
-}
-
-const getSaxDeb = (request, response) => {
-    pool.query('select SUM(c.salario) as ssalario, SUM(d.valor) as svalor from chart c inner join debitos d on (d.deb_id = c.id)',(error, results) => {
-        if (error) {
-            throw error
-        }
-        response.status(200).json(results.rows)
-    })
-    console.log('Salario x Debitos');
-}
-
-const getPerfo = (request, response) => {
-    pool.query('select (SUM(c.salario) - SUM(d.valor)) as performa from chart c inner join debitos d on (d.deb_id = c.id)',(error, results) => {
-        if (error) {
-            throw error
-        }
-        response.status(200).json(results.rows)
-    })
-    console.log('Performa');
-}
+const qrGetChartById = 'SELECT c.salario, d.mes, g.valor FROM chart c  inner join dim_mes d on (d.mes_id = c.dim_mes) inner join debitos g on (g.dim_mes = d.mes_id)';
+const qrPrioris = 'SELECT id, priori, ano, valor, m.mes FROM prioridades p inner join dim_mes m on (m.mes_id = p.dim_mes) order by p.id';
+const qraddPriori = 'INSERT INTO prioridades (dim_mes, ano, priori,valor) VALUES ($1, $2, $3, $4)';
+const qrGetSaxDeb = 'select SUM(c.salario) as ssalario, SUM(d.valor) as svalor from chart c inner join debitos d on (d.deb_id = c.id)';
+const qrGetPerfor = 'select (SUM(c.salario) - SUM(d.valor)) as performa, m.mes from chart c inner join debitos d on (d.deb_id = c.id) inner join dim_mes m on (m.mes_id = d.dim_mes) group by m.mes';
 
 module.exports = {
-    getChartById,
-    getPrioris,
-    addPriori,
-    getSaxDeb,
-    getPerfo
+    qrGetChartById,
+    qrPrioris,
+    qraddPriori,
+    qrGetSaxDeb,    
+    qrGetPerfor,
+
 }
