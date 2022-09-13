@@ -6,7 +6,7 @@ const pool = new Pool({
     /* user: 'ydiyghfkmzredl',
     host: 'ec2-44-205-41-76.compute-1.amazonaws.com',
     database: 'd9chpetiioi5k7',
-    password: '87d4bf164b7176209b36cd893712fd3a6b72f675887fe18394816132a214c407',
+    password: 'c',
     port: 5432, */
     connectionString: connectDb,
     ssl: {
@@ -80,10 +80,21 @@ const getPerfo = (request, response) => {
     console.log('Performace');
 }
 
+const getGeral = (request, response) => {
+    pool.query(qr.qrGetGeral,(error, results) => {
+        if (error) {
+            throw error
+        }
+        response.status(200).json(results.rows)
+    })
+    console.log('Performace');
+}
+
 module.exports = {
     getChartById,
     getPrioris,
     addPriori,
     getSaxDeb,
-    getPerfo
+    getPerfo,
+    getGeral
 }

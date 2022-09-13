@@ -24,6 +24,7 @@ app.get('/priori/', db.getPrioris);
 app.post('/v1/priori', db.addPriori);
 app.get('/sadeb/', db.getSaxDeb);
 app.get('/perfor/', db.getPerfo);
+app.get('/v1/dados', db.getGeral);
 
 app.listen(port, () => {
     console.log(`App running on port ${port}.`)
