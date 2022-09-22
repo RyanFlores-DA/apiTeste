@@ -12,10 +12,19 @@
           <div id="chart_div" style="width: 600px; height: 300;"></div>
         </td>
         <td style="width: 50%;">
-          <div id="myPieChart"></div>
+          <div id="hiddenDiv" style="display: none;">
+            <div id="myPieChart" ></div>
+          </div>
         </td>
       </tr>
     </table>
+    <script type="text/javascript" DEFER="DEFER">
+      function sad() {
+        document.getElementById("hiddenDiv").style.display = "block";
+      }
+      setInterval(sad, 1000);
+      setInterval(drawChart, 1000);
+    </script>
   </body>
 </html>
 

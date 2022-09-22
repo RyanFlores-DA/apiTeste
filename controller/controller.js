@@ -38,7 +38,7 @@ const getPrioris = (request, response) => {
 }
 
 const addPriori = (req, res) =>{
-    const {mes, ano, priori, valor} = req.body;
+    const {mes, ano, priori, valor} = req.params;
     //Validacao
     pool.query('SELECT * FROM prioridades', (error, results) =>{
         if(results.rows.length){

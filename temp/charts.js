@@ -4,12 +4,12 @@ var mes = '';
 var arrayDados = [];
 var arrayMes = [];
 var arrayDebitos = [];
-axios.get('http://localhost:4000/chart/')
+axios.get('http://covidapidiogenes.herokuapp.com/priori')
     .then(response => criaListaDinamica(response.data))
     .catch(error => console.log(error))
 const criaListaDinamica = (dados) => {
     dados.map(x => {
-        arrayDados.push(x.salario)
+        arrayDados.push(x.id)
         arrayMes.push(x.mes)
         arrayDebitos.push(x.valor)
         console.log('All be function 2');

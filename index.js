@@ -21,7 +21,7 @@ app.get('/', (request, response) => {
 
 app.get('/salario/', db.getChartById);
 app.get('/priori/', db.getPrioris);
-app.post('/v1/priori', db.addPriori);
+app.post('/v1/priori/:mes/:ano/:priori/:valor', db.addPriori);
 app.get('/sadeb/', db.getSaxDeb);
 app.get('/perfor/', db.getPerfo);
 app.get('/v1/dados', db.getGeral);
